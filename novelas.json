@@ -223,10 +223,13 @@
   "banner": ""
  },
  {
-  "title": "𝑭𝒂𝒕𝒆/𝑨𝒏𝒕𝒂𝒈𝒐𝒏𝒊𝒔𝒕",
-  "synopsis": "Ser Isekaiizado en otro mundo es realmente genial, sobre todo embarcarse en una aventura como héroe para derrotar al Rey Demonio, que resulta ser una mujer, y hacerla parte de tu harén. Es realmente el sueño de millones de personas que esperan ser Isekaiizados en otro mundo. Si Reinhard fuera Isekaiizado así, podría sonreír por el resto de su vida. Sin embargo, el destino tiene otros planes para é…",
+  "title": "𝑭𝒂𝒕𝒆/𝑨𝒏𝒕𝒂𝒈𝒐𝒏𝒊𝒔𝒕𝒂 𝒅𝒆𝒇𝒊𝒏𝒊𝒕𝒊𝒗𝒐",
+  "synopsis": "Ser Isekaiizado en otro mundo es realmente genial, sobre todo embarcarse en una aventura como héroe para derrotar al Rey Demonio, que resulta ser una mujer, y hacerla parte de tu harén. Es realmente el sueño de millones de personas que esperan ser Isekaiizados en otro mundo. Si Reinhard fuera Isekaiizado así, podría sonreír por el resto de su vida. Sin embargo, el destino tiene otros planes para él, ya que se convierte en la desafortunada víctima de Isekai, aterrizando en la madriguera del conejo conocida como el mundo iluminado por la luna. Con numerosos psicópatas vagando por ahí buscando cumplir sus sueños, debe esforzarse por defender su pequeña vida en este mundo caótico, especialmente cuando el mundo está destinado a durar solo una década más. Por suerte, la suerte de nueve generaciones de su familia lo ayuda en momentos críticos. Finalmente, recibe ayuda para salvar su pequeña vida: [¡Ding!] "¿Eh? ¿Por fin llegó mi ayuda?" [¡Felicidades, Anfitrión! ¡Has sido elegido como anfitrión del Sistema Simulador de Antagonistas!] "¡Por fin! Fin... espera... ¿A qué te refieres con Antagonista? ¿No debería ser simplemente un Simulador sin Antagonista?" [Como su nombre indica, el Sistema Simulador de Antagonistas está diseñado específicamente para personas con grandes aspiraciones a convertirse en antagonistas, ¡y has sido seleccionado para ser el Antagonista Definitivo! ¡Felicidades, Anfitrión!] "¿Eh? ¿Antagonista Definitivo? ¿Qué demonios? ¿Cómo encaja alguien tan gentil como yo como el antagonista definitivo?" [No es así.] [Anfitrión, sin duda posees una fuerte motivación, planes claros, voluntad firme, secretos ocultos, una ejecución sobresaliente, un encanto personal extraordinario y la determinación de subvertir el mundo.] [Sin duda, eres el candidato perfecto para el antagonista definitivo.]
+
+…",
   "chapters": 16,
-  "fandoms": [],
+  "fandoms": ["Fate"
+  ],
   "mature": false,
   "link": "https://www.patreon.com/collection/2326449",
   "cover": "img/covers/fate-antagonist.jpg",
@@ -361,10 +364,12 @@
   "banner": ""
  },
  {
-  "title": "Espadas Entrelazadas: Destino",
-  "synopsis": "En el vibrante mundo de Earth Land, donde la magia fluye como una corriente vital, se encuentran dos figuras cuyos destinos están destinados a entrelazarse de manera inesperada y profunda.Erza Scarlet, conocida en todo Fiore como \"Titania\", una maga formidable cuya habilidad para manejar una variedad de armaduras mágicas es tan legendaria como su firme determinación. Su nombre evoca respeto y ad",
+  "title": "Espadas Entrelazadas: Destino Escarlata y Alma de Acero",
+  "synopsis": "En el vibrante mundo de Earth Land, donde la magia fluye como una corriente vital, se encuentran dos figuras cuyos destinos están destinados a entrelazarse de manera inesperada y profunda. Erza Scarlet, conocida en todo Fiore como "Titania", una maga formidable cuya habilidad para manejar una variedad de armaduras mágicas es tan legendaria como su firme determinación. Su nombre evoca respeto y admiración en igual medida entre los gremios de magos y más allá, donde su camino ha sido marcado por la justicia y el combate por el bien. En contraste, Emiya Shirou, un joven cuyo viaje comenzó hace mucho tiempo en un mundo diferente, se encuentra ahora en este reino de magia y maravillas. Su llegada a Fiore no fue más que un capricho de un tercero; fue un giro del destino que lo condujo hacia un nuevo propósito en un lugar donde puede seguir su sueño de ser un Aliado de la Justicia. Ambos llevan consigo historias de lucha, superación y la constante búsqueda de justicia en un mundo donde el equilibrio entre la luz y la oscuridad nunca es estático. Pero ahora, en un giro del destino, sus caminos se cruzan de manera inesperada, unidos por un propósito que trasciende las fronteras de sus propios mundos individuales. Desde las bulliciosas calles de Magnolia hasta los confines más oscuros de Fiore, su viaje promete desafíos inimaginables, amistades inesperadas y la revelación de verdades enterradas en lo mas profundo de sus pasados. Reunidos por un destino escrito en las estrellas, Erza Scarlet y Emiya Shirou ahora se embarcan juntos en una búsqueda que cambiará no solo sus vidas, sino también el curso de sus propios destinos Este es el relato de cómo dos almas valientes, cada una con su propio pasado, encuentran en el otro un compañero en el camino hacia la luz, en un mundo donde la magia y la fortaleza del corazón caminan de la mano
+  ",
   "chapters": 15,
-  "fandoms": [],
+  "fandoms": ["Fairy Tail","Fate"
+  ],
   "mature": false,
   "link": "https://www.patreon.com/collection/2305301",
   "cover": "img/covers/espadas-entrelazadas-destino.jpg",
