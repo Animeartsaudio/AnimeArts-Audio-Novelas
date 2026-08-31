@@ -17,22 +17,24 @@
 
 <header class="top">
   <div class="wrap">
-    <div class="brand-row">
-      <div>
-        <div class="brand">
-          <div class="brand-mark"></div>
-          <div>
-            <span class="eyebrow">Frecuencia narrada · Multiverso crossover</span>
-            <h1>AnimeArts Audio Novelas</h1>
-          </div>
+    <div class="top-bar">
+      <div class="brand-mini">
+        <img src="img/logo/perfil.png" alt="AnimeArts Audio Novelas" class="brand-photo">
+        <div>
+          <span class="eyebrow">Frecuencia narrada · Multiverso crossover</span>
+          <h1>AnimeArts Audio Novelas</h1>
         </div>
-        <p class="tag">Un mismo dial, cientos de mundos: Fate, Naruto, RWBY, DxD, Danmachi, Re:Zero y más, narrados como audionovela. Sintoniza la que te llame.</p>
+      </div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="searchInput" placeholder="Buscar una novela…">
       </div>
       <a class="patreon-btn" href="https://www.patreon.com/c/AnimeFicsArts?vanity=user" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="15" cy="9.5" r="6.5"/><rect x="2.5" y="3" width="3.5" height="18"/></svg>
         Escuchar en Patreon
       </a>
     </div>
+    <p class="tag">Un mismo dial, cientos de mundos: Fate, Naruto, RWBY, DxD, Danmachi, Re:Zero y más, narrados como audionovela. Sintoniza la que te llame.</p>
     <div class="stats-row">
       <div class="stat"><b id="statTotal">0</b><span>Audionovelas</span></div>
       <div class="stat"><b id="statFandoms">0</b><span>Universos cruzados</span></div>
@@ -44,10 +46,6 @@
 <div class="controls">
   <div class="wrap">
     <div class="search-row">
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="searchInput" placeholder="Buscar por título, personaje o palabra clave…">
-      </div>
       <select id="sort">
         <option value="orden">Orden del catálogo</option>
         <option value="az">A–Z</option>
