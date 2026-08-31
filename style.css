@@ -7,20 +7,20 @@
    ===================================================================== */
 
 :root{
-  --bg: #120e1a;          /* fondo general */
-  --bg-soft: #170f24;     /* fondo del centro del logo */
-  --surface: #1d1630;     /* tarjetas, buscador, chips */
-  --surface-2: #241b3a;   /* superficies secundarias (botón "cargar más", pills) */
-  --line: #322850;        /* bordes y separadores */
-  --ink: #f3ede4;         /* texto principal */
-  --ink-dim: #b9aecf;     /* texto secundario */
-  --ink-faint: #7d7098;   /* texto terciario / etiquetas pequeñas */
-  --amber: #f2a541;       /* color de acento — capítulos, detalle del logo */
-  --amber-dim: #7a5a2a;
-  --rift: #8f6bff;        /* color principal — chips activos, foco, bordes hover */
-  --rift-2: #4fd5e0;      /* color secundario — eyebrow, links */
+  --bg: #0e0c18;          /* fondo general — azul muy oscuro */
+  --bg-soft: #130f22;
+  --surface: #191428;     /* tarjetas, buscador */
+  --surface-2: #201a35;   /* superficies secundarias */
+  --line: #2e2550;        /* bordes */
+  --ink: #f0eaf8;         /* texto principal — blanco ligeramente lavanda */
+  --ink-dim: #bbaed4;     /* texto secundario */
+  --ink-faint: #7a6d99;   /* texto terciario */
+  --amber: #e8a4c8;       /* acento principal — rosa lila (color dominante foto) */
+  --amber-dim: #6e3f5a;
+  --rift: #b48ee8;        /* violeta suave — chips activos, foco */
+  --rift-2: #8bcde8;      /* celeste pastel — links, detalles */
   --mature: #e2566b;      /* insignia +18 */
-  --patreon: #e0384f;     /* botones de Patreon */
+  --patreon: #e0384f;
   --patreon-light: #ff5f6e;
   --radius: 14px;
   --radius-sm: 8px;
@@ -32,8 +32,8 @@ html{scroll-behavior:smooth;}
 body{
   margin:0;
   background:
-    radial-gradient(1200px 600px at 15% -10%, rgba(143,107,255,.16), transparent 60%),
-    radial-gradient(900px 500px at 100% 0%, rgba(79,213,224,.10), transparent 55%),
+    radial-gradient(1200px 600px at 15% -10%, rgba(180,142,232,.14), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(139,205,232,.09), transparent 55%),
     var(--bg);
   color:var(--ink);
   font-family:'Inter', sans-serif;
@@ -50,12 +50,12 @@ a{color:inherit;}
     var(--amber) 0 2px, transparent 2px 14px,
     var(--rift) 14px 16px, transparent 16px 30px,
     var(--rift-2) 30px 32px, transparent 32px 48px);
-  opacity:.55;
+  opacity:.6;
 }
 
 /* ---------- header ---------- */
 header.top{
-  padding:52px 0 28px;
+  padding:28px 0 20px;
   border-bottom:1px solid var(--line);
   position:relative;
   overflow:hidden;
@@ -75,23 +75,10 @@ header.top{
   font-family:'Fraunces', serif;
   font-weight:600;
   font-style:italic;
-  font-size:clamp(20px,2.4vw,26px);
+  font-size:clamp(20px,2.4vw,28px);
   margin:0;
   letter-spacing:.2px;
   white-space:nowrap;
-}
-.top-bar .eyebrow{
-  font-family:'Space Mono', monospace;
-  font-size:10px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--rift-2);
-  display:block;
-  margin-bottom:2px;
-  white-space:nowrap;
-}
-header.top .tag{
-  margin:18px 0 0; color:var(--ink-dim); font-size:14.5px; max-width:60ch;
 }
 .patreon-btn{
   display:inline-flex; align-items:center; gap:10px;
@@ -121,7 +108,7 @@ header.top .tag{
 /* ---------- controles (buscador, orden, chips) ---------- */
 .controls{
   position:sticky; top:0; z-index:20;
-  background:rgba(18,14,26,.92);
+  background:rgba(14,12,24,.92);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
   padding:16px 0;
@@ -168,7 +155,7 @@ select#sort{
 }
 .chip:hover{ border-color:var(--rift); color:var(--ink); }
 .chip.active{
-  background:linear-gradient(180deg, var(--rift), #6d4ee0);
+  background:linear-gradient(180deg, var(--rift), #8a5fd4);
   border-color:transparent; color:#fff;
 }
 .chip.mature-chip.active{
@@ -267,7 +254,7 @@ main{ padding:32px 0 20px; }
 
 /* ---------- modal de detalle ---------- */
 .modal-overlay{
-  position:fixed; inset:0; background:rgba(8,6,14,.78);
+  position:fixed; inset:0; background:rgba(5,4,12,.82);
   backdrop-filter:blur(4px);
   display:none; align-items:center; justify-content:center;
   z-index:100; padding:20px;
