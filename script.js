@@ -34,7 +34,7 @@ const FANDOM_COLORS = {
   "default": ["#241b3a", "#4fd5e0"],
 };
 
-const QUICK_FANDOMS = ["Fate", "Boku no Hero", "DxD", "RWBY", "Re:Zero", "Naruto", "Danmachi", "Honkai Impact", "Bleach", "Genshin Impact"];
+const QUICK_FANDOMS = ["Fate","Dc", "Boku no Hero", "DxD", "RWBY", "Re:Zero", "Naruto", "Danmachi", "Honkai Impact", "Bleach", "Genshin Impact"];
 
 const BATCH = 30;
 
