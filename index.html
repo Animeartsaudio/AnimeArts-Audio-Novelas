@@ -8,22 +8,18 @@
 <link rel="icon" href="img/logo/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="dial-strip"></div>
-
 <header class="top">
   <div class="wrap">
     <div class="top-bar">
-        <div class="brand-mini">
-          <img src="img/logo/perfil.png" alt="AnimeArts Audio Novelas" class="brand-photo">
-          <div>
-            <h1>AnimeArts Audio Novelas</h1>
-          </div>
-        </div>
+      <div class="brand-mini">
+        <img src="img/logo/perfil.png" alt="AnimeArts Audio Novelas" class="brand-photo">
+        <div><h1>AnimeArts Audio Novelas</h1></div>
+      </div>
       <div class="search-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="searchInput" placeholder="Buscar una novela…">
@@ -40,7 +36,6 @@
     </div>
   </div>
 </header>
-
 <div class="controls">
   <div class="wrap">
     <div class="search-row">
@@ -54,7 +49,6 @@
     <div class="chip-row" id="chipRow"></div>
   </div>
 </div>
-
 <main class="wrap">
   <div class="grid" id="grid"></div>
   <div class="empty-state" id="emptyState" style="display:none;">
@@ -66,11 +60,9 @@
     <button class="load-more" id="loadMoreBtn">Cargar más historias</button>
   </div>
 </main>
-
 <footer>
   <p>AnimeArts Audio Novelas · Todas las historias se escuchan en <a href="https://www.patreon.com/c/AnimeFicsArts?vanity=user" target="_blank" rel="noopener">Patreon</a>.</p>
 </footer>
-
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <div class="modal-band" id="modalBand"></div>
@@ -88,7 +80,6 @@
     </div>
   </div>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>

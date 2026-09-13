@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — AnimeArts Audio Novelas</title>
+<link rel="icon" href="img/logo/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0c18;
+  --surface: #191428;
+  --surface-2: #201a35;
+  --line: #2e2550;
+  --ink: #f0eaf8;
+  --ink-dim: #bbaed4;
+  --ink-faint: #7a6d99;
+  --rose: #e8a4c8;
+  --violet: #b48ee8;
+  --sky: #8bcde8;
+  --ok: #6ee8a4;
+  --err: #e2566b;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ── top bar ── */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  position: sticky; top: 0; z-index: 10;
+}
+.topbar-brand { display: flex; align-items: center; gap: 12px; }
+.topbar-brand img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--line); }
+.topbar-brand span { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; }
+.topbar-badge {
+  background: var(--surface-2); border: 1px solid var(--line);
+  color: var(--ink-faint); font-size: 11px; padding: 4px 10px; border-radius: 100px;
+}
+.topbar-link {
+  color: var(--sky); text-decoration: none; font-size: 13px; font-weight: 500;
+  padding: 8px 14px; border: 1px solid var(--line); border-radius: 100px;
+  transition: border-color .15s ease;
+}
+.topbar-link:hover { border-color: var(--sky); }
+
+/* ── layout ── */
+.page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+.page-title {
+  font-family: 'Fraunces', serif; font-style: italic;
+  font-size: 28px; font-weight: 600; margin-bottom: 6px;
+}
+.page-sub { color: var(--ink-dim); font-size: 14px; margin-bottom: 36px; }
+
+/* ── secciones del formulario ── */
+.section {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--violet); margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── campos ── */
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field-row.single { grid-template-columns: 1fr; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+label {
+  font-size: 12px; font-weight: 600; color: var(--ink-dim);
+}
+input[type="text"], input[type="url"], input[type="number"], textarea, select {
+  background: var(--surface-2); border: 1px solid var(--line);
+  color: var(--ink); font-family: 'Inter'; font-size: 14px;
+  padding: 11px 14px; border-radius: 8px; outline: none;
+  transition: border-color .15s ease;
+  width: 100%;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--violet); }
+input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+select option { background: var(--surface-2); }
+
+/* ── tags de fandom ── */
+.fandom-grid {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+}
+.fandom-chip {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 100px; padding: 6px 12px; cursor: pointer;
+  font-size: 13px; color: var(--ink-dim); user-select: none;
+  transition: all .13s ease;
+}
+.fandom-chip:hover { border-color: var(--violet); color: var(--ink); }
+.fandom-chip.selected {
+  background: rgba(180, 142, 232, .18);
+  border-color: var(--violet); color: var(--ink);
+}
+.fandom-chip .dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--line);
+  flex-shrink: 0; transition: background .13s ease;
+}
+.fandom-chip.selected .dot { background: var(--violet); }
+
+/* fandom personalizado */
+.fandom-custom { display: flex; gap: 8px; margin-top: 10px; }
+.fandom-custom input { flex: 1; }
+.btn-add-fandom {
+  background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-dim);
+  padding: 0 16px; border-radius: 8px; cursor: pointer; font-size: 20px;
+  font-weight: 300; transition: all .13s ease; white-space: nowrap;
+}
+.btn-add-fandom:hover { border-color: var(--violet); color: var(--ink); }
+
+/* ── portada ── */
+.cover-area {
+  display: flex; gap: 20px; align-items: flex-start;
+}
+.cover-drop {
+  width: 120px; height: 180px; border-radius: 10px; flex-shrink: 0;
+  border: 2px dashed var(--line); background: var(--surface-2);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; transition: border-color .15s ease; overflow: hidden;
+  position: relative;
+}
+.cover-drop:hover { border-color: var(--violet); }
+.cover-drop img {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; inset: 0;
+}
+.cover-drop-label {
+  font-size: 11px; color: var(--ink-faint); text-align: center; padding: 8px;
+  line-height: 1.4; z-index: 1;
+}
+.cover-drop svg { width: 28px; height: 28px; color: var(--ink-faint); margin-bottom: 6px; }
+.cover-info { flex: 1; }
+.cover-filename {
+  font-size: 12px; color: var(--ink-faint); margin-top: 8px;
+  min-height: 18px;
+}
+.cover-hint {
+  font-size: 12px; color: var(--ink-faint); line-height: 1.6; margin-top: 10px;
+}
+
+/* ── toggle +18 ── */
+.toggle-row {
+  display: flex; align-items: center; gap: 14px; cursor: pointer;
+}
+.toggle {
+  width: 44px; height: 24px; border-radius: 100px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  position: relative; transition: background .15s ease, border-color .15s ease;
+  flex-shrink: 0; cursor: pointer;
+}
+.toggle::after {
+  content: ''; position: absolute; left: 3px; top: 3px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--ink-faint); transition: left .15s ease, background .15s ease;
+}
+.toggle.on { background: rgba(226,86,107,.2); border-color: var(--err); }
+.toggle.on::after { left: 23px; background: var(--err); }
+.toggle-label { font-size: 14px; color: var(--ink-dim); }
+.toggle-label b { color: var(--err); }
+
+/* ── botón principal ── */
+.btn-generate {
+  width: 100%; padding: 16px; border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--violet), #8a5fd4);
+  color: #fff; font-family: 'Inter'; font-size: 15px; font-weight: 700;
+  border: none; cursor: pointer; transition: opacity .15s ease;
+  margin-top: 8px;
+}
+.btn-generate:hover { opacity: .88; }
+.btn-generate:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ── resultado ── */
+.result-area { display: none; }
+.result-area.visible { display: block; }
+.result-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+}
+.result-title { font-size: 13px; font-weight: 600; color: var(--ok); }
+.result-steps {
+  font-size: 13px; color: var(--ink-dim); line-height: 1.8;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 14px 18px; margin-bottom: 14px;
+}
+.result-steps b { color: var(--ink); }
+.result-steps code {
+  font-family: monospace; font-size: 12px;
+  background: rgba(255,255,255,.07); padding: 1px 6px; border-radius: 4px;
+}
+.json-block {
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 18px 20px;
+  font-family: monospace; font-size: 12.5px; line-height: 1.7;
+  color: var(--sky); overflow-x: auto; white-space: pre;
+  max-height: 360px; overflow-y: auto;
+}
+.btn-copy {
+  background: var(--surface-2); border: 1px solid var(--line); color: var(--ink);
+  padding: 8px 18px; border-radius: 100px; font-family: 'Inter'; font-weight: 600;
+  font-size: 13px; cursor: pointer; transition: all .15s ease;
+}
+.btn-copy:hover { border-color: var(--violet); }
+.btn-copy.copied { border-color: var(--ok); color: var(--ok); }
+
+/* ── preview card ── */
+.preview-wrap { display: none; }
+.preview-wrap.visible { display: block; }
+.preview-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--violet); margin-bottom: 14px;
+}
+.preview-card {
+  width: 200px; background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 12px; overflow: hidden;
+}
+.preview-poster {
+  aspect-ratio: 2/3; position: relative; overflow: hidden;
+}
+.preview-poster img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.preview-poster-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #3a1f5b, #b48ee8);
+  display: flex; align-items: flex-end; padding: 10px;
+}
+.preview-fandom-label {
+  font-size: 9px; font-family: monospace; text-transform: uppercase;
+  background: rgba(0,0,0,.35); color: rgba(255,255,255,.9);
+  padding: 2px 7px; border-radius: 4px; backdrop-filter: blur(2px);
+}
+.preview-chapters {
+  position: absolute; right: 8px; bottom: 8px;
+  font-size: 10px; font-family: monospace; color: var(--rose);
+  background: rgba(0,0,0,.4); padding: 2px 7px; border-radius: 4px;
+}
+.preview-mature-badge {
+  position: absolute; top: 7px; right: 7px;
+  background: var(--err); color: #fff; font-size: 9px; font-weight: 700;
+  padding: 2px 6px; border-radius: 4px; font-family: monospace;
+}
+.preview-title {
+  font-family: 'Fraunces', serif; font-size: 13px; font-weight: 600;
+  padding: 10px 12px 12px; line-height: 1.3; color: var(--ink);
+}
+
+/* ── historial ── */
+.history-list { display: flex; flex-direction: column; gap: 10px; }
+.history-item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 12px 16px; gap: 12px;
+}
+.history-title { font-size: 14px; font-weight: 500; flex: 1; }
+.history-fandoms { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+.history-time { font-size: 11px; color: var(--ink-faint); white-space: nowrap; flex-shrink: 0; }
+.btn-regen {
+  background: none; border: 1px solid var(--line); color: var(--ink-dim);
+  padding: 5px 11px; border-radius: 100px; font-size: 11px;
+  cursor: pointer; transition: all .13s ease; white-space: nowrap;
+}
+.btn-regen:hover { border-color: var(--violet); color: var(--ink); }
+.empty-history {
+  text-align: center; padding: 30px; color: var(--ink-faint); font-size: 13px;
+}
+
+/* ── responsive ── */
+@media (max-width: 640px) {
+  .topbar { padding: 14px 16px; }
+  .page { padding: 24px 16px 60px; }
+  .section { padding: 20px 18px; }
+  .field-row { grid-template-columns: 1fr; }
+  .cover-area { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <img src="img/logo/perfil.png" alt="logo">
+    <span>AnimeArts Audio Novelas</span>
+    <span class="topbar-badge">Panel admin</span>
+  </div>
+  <a href="index.html" class="topbar-link">← Ver catálogo</a>
+</div>
+
+<div class="page">
+  <h1 class="page-title">Agregar audionovela</h1>
+  <p class="page-sub">Completa el formulario y copia el bloque JSON al final de <code style="font-size:13px;background:var(--surface-2);padding:2px 7px;border-radius:4px">novelas.json</code>.</p>
+
+  <!-- Sección 1: datos básicos -->
+  <div class="section">
+    <div class="section-title">Datos básicos</div>
+    <div class="field-row" style="margin-bottom:16px">
+      <div class="field">
+        <label for="titulo">Título completo</label>
+        <input type="text" id="titulo" placeholder="Ej: Naruto: El Cazador de Demonios">
+      </div>
+      <div class="field">
+        <label for="capitulos">Capítulos publicados</label>
+        <input type="number" id="capitulos" min="0" value="1">
+      </div>
+    </div>
+    <div class="field-row single">
+      <div class="field">
+        <label for="sinopsis">Sinopsis</label>
+        <textarea id="sinopsis" placeholder="Descripción de la historia que se verá en el modal al hacer clic…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección 2: fandoms -->
+  <div class="section">
+    <div class="section-title">Fandoms y etiquetas</div>
+    <div class="fandom-grid" id="fandomGrid"></div>
+    <div class="fandom-custom">
+      <input type="text" id="customFandom" placeholder="Fandom personalizado (ej: Chainsaw Man)">
+      <button class="btn-add-fandom" id="btnAddFandom" title="Agregar">+</button>
+    </div>
+    <div style="margin-top:18px;display:flex;align-items:center;gap:14px;">
+      <div class="toggle" id="matureToggle"></div>
+      <span class="toggle-label">Contenido <b>+18</b></span>
+    </div>
+  </div>
+
+  <!-- Sección 3: portada y link -->
+  <div class="section">
+    <div class="section-title">Portada y Patreon</div>
+    <div class="cover-area" style="margin-bottom:20px">
+      <div class="cover-drop" id="coverDrop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <span class="cover-drop-label">Haz clic o arrastra<br>la portada aquí</span>
+      </div>
+      <div class="cover-info">
+        <div class="cover-filename" id="coverFilename">Sin portada seleccionada</div>
+        <div class="cover-hint">
+          La imagen debe estar guardada en <code style="font-size:11px;background:var(--surface-2);padding:1px 5px;border-radius:4px">img/covers/</code> antes de subir el sitio.<br><br>
+          El nombre de archivo que escribas acá debe coincidir exactamente con el archivo real.<br><br>
+          Formato recomendado: JPG o PNG, relación 2:3 (ej: 800×1200 px).
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="coverFilename">Nombre del archivo de portada</label>
+          <input type="text" id="coverInput" placeholder="ej: naruto-cazador-demonios.jpg">
+        </div>
+      </div>
+    </div>
+    <div class="field-row single">
+      <div class="field">
+        <label for="linkPatreon">Link de la colección en Patreon</label>
+        <input type="url" id="linkPatreon" placeholder="https://www.patreon.com/collection/xxxxxxx">
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview + botón -->
+  <div class="section">
+    <div class="section-title">Vista previa de la tarjeta</div>
+    <div class="preview-wrap visible" id="previewWrap">
+      <div class="preview-card" id="previewCard">
+        <div class="preview-poster" id="previewPoster">
+          <div class="preview-poster-placeholder" id="previewPlaceholder">
+            <span class="preview-fandom-label" id="previewFandomLabel">Multiverso</span>
+          </div>
+          <span class="preview-chapters" id="previewChapters">1 cap.</span>
+        </div>
+        <div class="preview-title" id="previewTitle">Título de la novela</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" id="btnGenerate">Generar bloque JSON</button>
+
+  <!-- Resultado -->
+  <div class="result-area" id="resultArea" style="margin-top:24px">
+    <div class="section">
+      <div class="result-header">
+        <span class="result-title">✓ Bloque generado</span>
+        <button class="btn-copy" id="btnCopy">Copiar</button>
+      </div>
+      <div class="result-steps">
+        <b>Pasos para agregar la novela al sitio:</b><br>
+        1. Guarda la portada en <code>img/covers/</code> con el nombre exacto que pusiste arriba.<br>
+        2. Abre <code>novelas.json</code> en VS Code.<br>
+        3. Ve al final del archivo, justo antes del último <code>]</code>.<br>
+        4. Agrega una coma después del último <code>}</code> y pega el bloque de abajo.<br>
+        5. Guarda el archivo y sube los cambios a GitHub Desktop.
+      </div>
+      <div class="json-block" id="jsonBlock"></div>
+    </div>
+  </div>
+
+  <!-- Historial -->
+  <div class="section" style="margin-top:32px">
+    <div class="section-title">Novelas generadas en esta sesión</div>
+    <div class="history-list" id="historyList">
+      <div class="empty-history">Todavía no generaste ninguna novela en esta sesión.</div>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="coverFileInput" accept="image/*" style="display:none">
+
+<script>
+// ── estado ──────────────────────────────────────────────────────────
+const FANDOMS = [
+  "Fate","DxD","Boku no Hero","RWBY","Re:Zero","Danmachi","Naruto",
+  "Honkai Impact","Bleach","Genshin Impact","Honkai Star Rail","Jujutsu Kaisen",
+  "Marvel","DC","Devil May Cry","Tate no Yuusha","Pokemon","Overlord",
+  "Transformers","Star Wars","Persona","Akame ga Kill","Fairy Tail","Ben 10",
+  "Demon Slayer","Arknights","Mushoku Tensei","Attack on Titan","One Punch Man",
+  "One Piece","Dragon Ball","Date A Live","Youjo Senki","Warhammer","Champione",
+  "Sword Art Online","Digimon","Doom","Solo Leveling","SCP","Fallout","Halo",
+  "Kingdom Hearts","Minecraft","Sonic","Spider-Man",
+];
+
+let selectedFandoms = [];
+let mature = false;
+let coverDataURL = null;
+let history = [];
+
+// ── chips de fandom ──────────────────────────────────────────────────
+const grid = document.getElementById('fandomGrid');
+FANDOMS.forEach(f => {
+  const chip = document.createElement('div');
+  chip.className = 'fandom-chip';
+  chip.dataset.fandom = f;
+  chip.innerHTML = `<span class="dot"></span>${f}`;
+  chip.addEventListener('click', () => toggleFandom(f, chip));
+  grid.appendChild(chip);
+});
+
+function toggleFandom(f, chip) {
+  if (selectedFandoms.includes(f)) {
+    selectedFandoms = selectedFandoms.filter(x => x !== f);
+    chip.classList.remove('selected');
+  } else {
+    selectedFandoms.push(f);
+    chip.classList.add('selected');
+  }
+  updatePreview();
+}
+
+// agregar fandom personalizado
+document.getElementById('btnAddFandom').addEventListener('click', addCustomFandom);
+document.getElementById('customFandom').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addCustomFandom();
+});
+
+function addCustomFandom() {
+  const inp = document.getElementById('customFandom');
+  const val = inp.value.trim();
+  if (!val) return;
+  if (selectedFandoms.includes(val)) { inp.value = ''; return; }
+  // crear chip si no existe
+  if (!grid.querySelector(`[data-fandom="${CSS.escape(val)}"]`)) {
+    const chip = document.createElement('div');
+    chip.className = 'fandom-chip selected';
+    chip.dataset.fandom = val;
+    chip.innerHTML = `<span class="dot" style="background:var(--violet)"></span>${val}`;
+    chip.addEventListener('click', () => toggleFandom(val, chip));
+    grid.appendChild(chip);
+  } else {
+    grid.querySelector(`[data-fandom="${CSS.escape(val)}"]`).classList.add('selected');
+  }
+  selectedFandoms.push(val);
+  inp.value = '';
+  updatePreview();
+}
+
+// ── toggle +18 ───────────────────────────────────────────────────────
+document.getElementById('matureToggle').addEventListener('click', () => {
+  mature = !mature;
+  document.getElementById('matureToggle').classList.toggle('on', mature);
+  updatePreview();
+});
+
+// ── portada ──────────────────────────────────────────────────────────
+document.getElementById('coverDrop').addEventListener('click', () => {
+  document.getElementById('coverFileInput').click();
+});
+document.getElementById('coverDrop').addEventListener('dragover', e => {
+  e.preventDefault();
+  e.currentTarget.style.borderColor = 'var(--violet)';
+});
+document.getElementById('coverDrop').addEventListener('dragleave', e => {
+  e.currentTarget.style.borderColor = '';
+});
+document.getElementById('coverDrop').addEventListener('drop', e => {
+  e.preventDefault();
+  e.currentTarget.style.borderColor = '';
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) loadCover(file);
+});
+document.getElementById('coverFileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file) loadCover(file);
+});
+
+function loadCover(file) {
+  const reader = new FileReader();
+  reader.onload = evt => {
+    coverDataURL = evt.target.result;
+    // mostrar thumbnail en el drop
+    const drop = document.getElementById('coverDrop');
+    drop.innerHTML = `<img src="${coverDataURL}" alt="portada">`;
+    // autogenerar nombre de archivo desde el nombre del archivo subido
+    const clean = file.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9.\-]/g, '');
+    document.getElementById('coverInput').value = clean;
+    document.getElementById('coverFilename').textContent = file.name;
+    updatePreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── preview en tiempo real ────────────────────────────────────────────
+function updatePreview() {
+  const titulo = document.getElementById('titulo').value.trim() || 'Título de la novela';
+  const caps = parseInt(document.getElementById('capitulos').value) || 0;
+  const fandomLabel = selectedFandoms.length
+    ? (selectedFandoms.length > 1 ? `${selectedFandoms[0]} × ${selectedFandoms[1]}` : selectedFandoms[0])
+    : 'Multiverso';
+
+  document.getElementById('previewTitle').textContent = titulo;
+  document.getElementById('previewChapters').textContent = `${caps} cap.`;
+  document.getElementById('previewFandomLabel').textContent = fandomLabel;
+
+  const poster = document.getElementById('previewPoster');
+  // mature badge
+  const existing = poster.querySelector('.preview-mature-badge');
+  if (existing) existing.remove();
+  if (mature) {
+    const badge = document.createElement('span');
+    badge.className = 'preview-mature-badge';
+    badge.textContent = '+18';
+    poster.appendChild(badge);
+  }
+  // portada
+  const placeholder = document.getElementById('previewPlaceholder');
+  const existingImg = poster.querySelector('.preview-cover-img');
+  if (existingImg) existingImg.remove();
+  if (coverDataURL) {
+    const img = document.createElement('img');
+    img.src = coverDataURL;
+    img.className = 'preview-cover-img';
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
+    poster.insertBefore(img, placeholder);
+    placeholder.style.display = 'none';
+  } else {
+    placeholder.style.display = 'flex';
+    placeholder.querySelector('.preview-fandom-label').textContent = fandomLabel;
+  }
+}
+
+// live preview en cada keystroke
+['titulo','capitulos','sinopsis','coverInput','linkPatreon'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+
+// ── generar JSON ──────────────────────────────────────────────────────
+function slugify(s) {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').substring(0, 60);
+}
+
+document.getElementById('btnGenerate').addEventListener('click', () => {
+  const titulo = document.getElementById('titulo').value.trim();
+  if (!titulo) { alert('El título es obligatorio.'); return; }
+
+  const sinopsis = document.getElementById('sinopsis').value.trim();
+  const caps = parseInt(document.getElementById('capitulos').value) || 0;
+  const coverFile = document.getElementById('coverInput').value.trim();
+  const link = document.getElementById('linkPatreon').value.trim();
+
+  const obj = {
+    title: titulo,
+    synopsis: sinopsis,
+    chapters: caps,
+    fandoms: [...selectedFandoms],
+    mature,
+    cover: coverFile ? `img/covers/${coverFile}` : '',
+    banner: '',
+    link: link,
+  };
+
+  const json = JSON.stringify(obj, null, 1)
+    .replace(/^{/, '{')
+    .replace(/}$/, '}');
+
+  document.getElementById('jsonBlock').textContent = json;
+  document.getElementById('resultArea').classList.add('visible');
+  document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // historial de sesión
+  history.unshift({ titulo, fandoms: [...selectedFandoms], ts: new Date(), json });
+  renderHistory();
+});
+
+// ── copiar ────────────────────────────────────────────────────────────
+document.getElementById('btnCopy').addEventListener('click', () => {
+  const text = document.getElementById('jsonBlock').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('btnCopy');
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+  });
+});
+
+// ── historial ─────────────────────────────────────────────────────────
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (!history.length) {
+    list.innerHTML = '<div class="empty-history">Todavía no generaste ninguna novela en esta sesión.</div>';
+    return;
+  }
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item">
+      <div style="flex:1;min-width:0">
+        <div class="history-title">${escapeHTML(h.titulo)}</div>
+        <div class="history-fandoms">${h.fandoms.length ? h.fandoms.join(', ') : 'Sin fandom'}</div>
+      </div>
+      <div class="history-time">${h.ts.toLocaleTimeString('es', {hour:'2-digit',minute:'2-digit'})}</div>
+      <button class="btn-regen" onclick="reuseHistory(${i})">Editar</button>
+    </div>
+  `).join('');
+}
+
+function reuseHistory(i) {
+  const h = history[i];
+  document.getElementById('jsonBlock').textContent = h.json;
+  document.getElementById('resultArea').classList.add('visible');
+  document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function escapeHTML(s) {
+  const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+}
+
+// init
+updatePreview();
+</script>
+</body>
+</html>
