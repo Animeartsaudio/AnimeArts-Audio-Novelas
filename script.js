@@ -16,7 +16,6 @@
 // ===================================================================
 
 const FANDOM_COLORS = {
-  "Dc": ["#3b2f6b", "#8f6bff"],
   "Fate": ["#3b2f6b", "#8f6bff"],
   "DxD": ["#5b1f33", "#e2566b"],
   "Boku no Hero": ["#1f4a5b", "#4fd5e0"],
@@ -34,7 +33,7 @@ const FANDOM_COLORS = {
   "default": ["#241b3a", "#4fd5e0"],
 };
 
-const QUICK_FANDOMS = ["Fate","Dc", "Boku no Hero", "DxD", "RWBY", "Re:Zero", "Naruto", "Danmachi", "Honkai Impact", "Bleach", "Genshin Impact"];
+const QUICK_FANDOMS = ["Fate", "Boku no Hero", "DxD", "RWBY", "Re:Zero", "Naruto", "Danmachi", "Honkai Impact", "Bleach", "Genshin Impact"];
 
 const BATCH = 30;
 
