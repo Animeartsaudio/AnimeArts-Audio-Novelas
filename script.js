@@ -29,7 +29,7 @@ let state = { query:"", fandom:"Todos", matureOnly:false, sort:"orden", visible:
 
 async function cargarNovelas() {
   try {
-    const res = await fetch('novelas.json');
+    const res = await fetch('novelas.json?v=' + Date.now());
     NOVELAS = await res.json();
   } catch(e) {
     document.getElementById('grid').innerHTML =
