@@ -1,6 +1,6 @@
 :root{
-  --bg: #0e0c18;
-  --bg-soft: #130f22;
+  --bg: #090612;
+  --bg-soft: #0d0918;
   --surface: #191428;
   --surface-2: #201a35;
   --line: #2e2550;
@@ -30,7 +30,8 @@ body{
   position:relative;
   overflow-x:hidden;
 }
-/* ── Fondo de cristales ── */
+
+/* ── Fondo: noche con aurora rosada/lila ── */
 body::before{
   content:'';
   position:fixed;
@@ -38,46 +39,55 @@ body::before{
   z-index:0;
   pointer-events:none;
   background:
-    /* luz central azul profunda */
-    radial-gradient(ellipse 120% 80% at 50% 0%, rgba(30,60,180,.45), transparent 65%),
-    /* destellos violeta laterales */
-    radial-gradient(ellipse 40% 60% at 8% 30%,  rgba(140,80,240,.35), transparent 55%),
-    radial-gradient(ellipse 35% 55% at 92% 25%, rgba(100,60,220,.30), transparent 50%),
-    /* brillos blancos tipo cristal */
-    radial-gradient(ellipse 8% 25% at 20% 15%,  rgba(255,255,255,.18), transparent 60%),
-    radial-gradient(ellipse 5% 18% at 50% 8%,   rgba(255,255,255,.22), transparent 55%),
-    radial-gradient(ellipse 6% 20% at 78% 20%,  rgba(255,255,255,.15), transparent 55%),
-    radial-gradient(ellipse 4% 14% at 35% 35%,  rgba(180,160,255,.20), transparent 50%),
-    radial-gradient(ellipse 3% 12% at 65% 28%,  rgba(180,160,255,.18), transparent 50%),
-    /* resplandor rosado de marca */
-    radial-gradient(ellipse 50% 30% at 30% 60%,  rgba(180,100,200,.12), transparent 60%),
-    radial-gradient(ellipse 50% 30% at 70% 70%,  rgba(110,80,200,.10), transparent 60%),
-    /* base oscura */
-    linear-gradient(180deg, #060414 0%, #080618 40%, #0a0820 100%);
+    /* luna rosada brillante arriba derecha */
+    radial-gradient(ellipse 35% 30% at 78% 0%,   rgba(255,180,220,.55), transparent 60%),
+    /* halo de la luna */
+    radial-gradient(ellipse 55% 40% at 78% -5%,  rgba(220,140,200,.30), transparent 65%),
+    /* aurora lila izquierda */
+    radial-gradient(ellipse 55% 60% at -8% 25%,  rgba(180,142,232,.38), transparent 58%),
+    /* reflejo rosado en suelo */
+    radial-gradient(ellipse 70% 30% at 50% 105%, rgba(200,120,180,.22), transparent 65%),
+    /* destello lila centro-alto */
+    radial-gradient(ellipse 40% 25% at 45% 0%,   rgba(200,160,255,.15), transparent 55%),
+    /* neblina profunda derecha */
+    radial-gradient(ellipse 40% 50% at 110% 60%, rgba(160,100,220,.18), transparent 55%),
+    /* base azul noche */
+    linear-gradient(175deg, #08040f 0%, #0b0615 35%, #0f081c 70%, #0d0618 100%);
 }
-/* Columnas de cristal simuladas con franjas verticales */
+
+/* ── Pétalos / partículas flotando (puntos de luz difusa) ── */
 body::after{
   content:'';
   position:fixed;
   inset:0;
   z-index:0;
   pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0px,
-      transparent 60px,
-      rgba(100,140,255,.03) 60px,
-      rgba(100,140,255,.03) 62px,
-      transparent 62px,
-      transparent 120px,
-      rgba(180,160,255,.04) 120px,
-      rgba(180,160,255,.04) 121px,
-      transparent 121px,
-      transparent 180px
-    );
-  mask-image: linear-gradient(180deg, rgba(0,0,0,.8) 0%, rgba(0,0,0,.3) 60%, transparent 100%);
+  background-image:
+    radial-gradient(ellipse 1.5px 3px at 12% 18%,  rgba(255,200,230,.55), transparent),
+    radial-gradient(ellipse 2px 1.5px at 28% 8%,   rgba(210,170,255,.50), transparent),
+    radial-gradient(ellipse 1px 2.5px at 45% 22%,  rgba(255,210,240,.45), transparent),
+    radial-gradient(ellipse 2.5px 1.5px at 60% 5%, rgba(200,160,255,.55), transparent),
+    radial-gradient(ellipse 1.5px 2px at 78% 14%,  rgba(255,190,220,.50), transparent),
+    radial-gradient(ellipse 1px 3px at 90% 28%,    rgba(220,180,255,.45), transparent),
+    radial-gradient(ellipse 2px 1px at 6% 42%,     rgba(255,200,235,.40), transparent),
+    radial-gradient(ellipse 1.5px 2px at 22% 55%,  rgba(200,155,245,.38), transparent),
+    radial-gradient(ellipse 1px 1.5px at 38% 38%,  rgba(255,215,240,.42), transparent),
+    radial-gradient(ellipse 2px 2.5px at 55% 48%,  rgba(215,170,255,.35), transparent),
+    radial-gradient(ellipse 1.5px 1px at 70% 35%,  rgba(255,200,230,.40), transparent),
+    radial-gradient(ellipse 1px 2px at 85% 50%,    rgba(200,160,250,.35), transparent),
+    radial-gradient(ellipse 2px 1.5px at 15% 70%,  rgba(255,195,225,.30), transparent),
+    radial-gradient(ellipse 1px 2.5px at 32% 75%,  rgba(210,165,255,.28), transparent),
+    radial-gradient(ellipse 1.5px 1px at 50% 65%,  rgba(255,205,235,.32), transparent),
+    radial-gradient(ellipse 2px 2px at 68% 72%,    rgba(200,155,245,.28), transparent),
+    radial-gradient(ellipse 1px 1.5px at 82% 68%,  rgba(255,200,230,.25), transparent),
+    radial-gradient(ellipse 1.5px 2px at 95% 60%,  rgba(215,170,255,.30), transparent),
+    radial-gradient(ellipse 2px 1px at 8% 85%,     rgba(255,190,220,.22), transparent),
+    radial-gradient(ellipse 1px 2px at 42% 88%,    rgba(200,160,250,.20), transparent),
+    radial-gradient(ellipse 1.5px 1.5px at 65% 82%,rgba(255,205,235,.22), transparent),
+    radial-gradient(ellipse 1px 2.5px at 88% 88%,  rgba(210,165,255,.20), transparent);
+  opacity: .9;
 }
+
 /* Todo el contenido encima del fondo */
 .wrap, header.top, .controls, main, footer, .modal-overlay { position:relative; z-index:1; }
 a{color:inherit;}
